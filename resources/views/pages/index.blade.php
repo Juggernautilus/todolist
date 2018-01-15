@@ -2,6 +2,12 @@
 
 @section('content')
 <h1>{{$title}}</h1>
-<p>This is a paragraph i dont know what to type much more</p>
+
+    @if(Auth::guest())
+    <p>Ielogojies vai reģistrējies, lai uzsāktu darbu.</p>
+    @else
+    <p>Kādu darbu šodien pildīsi?</p>
+    @endif
+
 @endsection
 

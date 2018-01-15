@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PagesController extends Controller
 {
@@ -17,7 +18,7 @@ class PagesController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
     public function index(){
-        $title = 'Welcome To Laravel';
+        $title = 'Sveicināts ToDoList';
         return view('pages.index', compact('title'));
     }
 

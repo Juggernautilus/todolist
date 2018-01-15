@@ -14,10 +14,32 @@
                         </div>
                     @endif
 
+                    <h2>Sveiks, {{Auth::user()->name}}!</h2>
+                    <p>Tev šobrīd ir {{Auth::user()->reward_points}} punkti.</p>
+
                     @if(Auth::user()->role != 0)
                     <a href="/public/todo/create" class ="btn btn-primary">Pievienot darbu</a>
                     @endif
-                    <h4>Nesen pievienotie darbi</h4>
+                    
+                    <h4>Neizpildīti darbi, kas pievienoti pēdējo 24h laikā</h4>
+                    <table class="table table-striped table-hover">                     
+                            <div class="table responsive">
+                                <tbody>
+                
+                                @foreach($todoitem as $item)
+                                        @if(($item->status == 0) && ($time < $item->created_at))
+                                        <tr>
+                                            <td><a href="{{route('todo.show', $item->id)}}">{{$item->title}}</a></td>
+                                        </tr>
+                                        @endif
+                            
+                                @endforeach
+                               </tbody>
+                            </div>
+                        </table>
+
+
+
                 </div>
             </div>
         </div>

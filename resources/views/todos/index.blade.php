@@ -19,8 +19,8 @@
                       <th>Darāmais</th>
                       <th>Prioritāte</th>
                       <th>Izpildes termiņš</th>
-                      <th>Status</th>
-                      <th>OK</th>
+                      <th>Iegūstamie punkti</th>
+                      <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +33,17 @@
                         <td><a href="{{route('todo.show', $item->id)}}">#</a></td>
                         <td> {{$item->title}}</td>
                         <td>{{$item->priority}}</td>
-                        <td>{{$item->deadline}}</td>
-                        <td>{{$item->status}}</td>
+                            @if(!$item->deadline)
+                            <td>Nav konkrēta termiņa</td>
+                            @elseif($curr_time < $item->deadline)
+                            <td>Atlikusi {{$curr_time->diffInDays(\Carbon\Carbon::parse($item->deadline), true)}} dienas</td>
+                            @else
+                            <td>Nokavēts par {{$curr_time->diffInDays(\Carbon\Carbon::parse($item->deadline), true)}} dienām</td>
+                            @endif
+                            <td>{{$item->reward}}</td>
                         <td>
-                                <a href="{{ route('todo/toggle', $item->id)}}">#</a>
+                                <a href="{{ route('todo/toggle', $item->id)}}"  class="btn btn-success">Izpildīt</a>
+
 
                         </td>
                     </tr>

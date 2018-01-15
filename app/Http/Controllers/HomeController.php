@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Todo;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $time = Carbon::now()->subDay(); 
+        $todoitem =  Todo::orderBy('created_at', 'desc')->get();
+        return view('home')->with('posts')->with('todoitem', $todoitem)->with('time', $time);
     }
 }

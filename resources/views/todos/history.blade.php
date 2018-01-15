@@ -13,10 +13,9 @@
                     <tr>
                       <th>#</th>
                       <th>Darāmais</th>
-                      <th>Prioritāte</th>
-                      <th>Izpildes termiņš</th>
-                      <th>Status</th>
-                      <th>OK</th>
+                      <th>Izpildītājs</th>
+                      <th>Izdarīts</th>
+                      <th>Iegūtie punkti</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,13 +27,9 @@
                     <tr>
                         <td><a href="{{route('todo.show', $item->id)}}">#</a></td>
                         <td> {{$item->title}}</td>
-                        <td>{{$item->priority}}</td>
-                        <td>{{$item->deadline}}</td>
-                        <td>{{$item->status}}</td>
-                        <td>
-                                <a href="{{ route('todo/toggle', $item->id)}}">#</a>
-
-                        </td>
+                        <td>{{$item->user_who_submitted}}</td>
+                        <td>{{$item->updated_at}}</td>
+                        <td>{{$item->reward}}</td>
                     </tr>
                     @endif
         

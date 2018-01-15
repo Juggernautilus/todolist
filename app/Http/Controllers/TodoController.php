@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use Auth;
+use Carbon\Carbon;
 
 class TodoController extends Controller
 {
@@ -25,9 +27,14 @@ class TodoController extends Controller
      */
     public function index()
     {
+        $curr_time = Carbon::now();
         $todoitem =  Todo::orderBy('priority', 'desc')->get();
-        return view ('todos.index')->with('todoitem', $todoitem);
+        return view ('todos.index')->with('todoitem', $todoitem)->with('curr_time', $curr_time);
     }
+
+  
+
+
 
 
     /**
@@ -62,7 +69,7 @@ class TodoController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'priority' => 'required',
-            'deadline' => 'required'
+            'reward' => 'required'
             
         ]);
 
@@ -70,6 +77,7 @@ class TodoController extends Controller
         $todo = new Todo;
         $todo->title = $request->input('title');
         $todo->priority = $request->input('priority');
+        $todo->reward = $request->input('reward');
         $todo->deadline = $request->input('deadline');
         $todo->user_who_added = auth()->user()->id;
         $todo->save();
@@ -116,6 +124,7 @@ class TodoController extends Controller
     {
         $todo = Todo::findOrFail($id);
         $todo->status = !$todo->status;
+        $todo->user_who_submitted = Auth::user()->id;
         $todo->save();
         return redirect('/todo')->with('success', 'Uzdevums izpildits');
     }
