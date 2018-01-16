@@ -15,7 +15,7 @@
 
         <div class="form-group">
                 {{Form::label('reward', 'Karmas punkti (10-100) *')}}
-                {{Form::number('reward', null, ['placeholder' => '40', 'min'=>10,'max'=>100])}}
+                {{Form::number('reward', null, ['min'=>10,'max'=>100])}}
             </div>
 
         <div class="form-group">

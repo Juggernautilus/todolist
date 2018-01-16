@@ -36,7 +36,7 @@
                             @if(!$item->deadline)
                             <td>Nav konkrēta termiņa</td>
                             @elseif($curr_time < $item->deadline)
-                            <td>Atlikusi {{$curr_time->diffInDays(\Carbon\Carbon::parse($item->deadline), true)}} dienas</td>
+                            <td>Atlikušas {{$curr_time->diffInDays(\Carbon\Carbon::parse($item->deadline), true)}} dienas</td>
                             @else
                             <td>Nokavēts par {{$curr_time->diffInDays(\Carbon\Carbon::parse($item->deadline), true)}} dienām</td>
                             @endif

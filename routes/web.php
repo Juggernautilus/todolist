@@ -21,7 +21,7 @@ Route::get('/hello', function () {
 
 
 Route::get('/', 'PagesController@index');
-Route::get('/services', 'PagesController@services');
+Route::get('/TOP', 'PagesController@TOP');
 
 Route::get('todo/check/{id}', 'TodoController@toggleBool')->name('todo/toggle');
 Route::get('todo', 'TodoController@timeToDeadLine')->name('todo/timeToDeadline');

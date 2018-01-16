@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\User;
 
 class PagesController extends Controller
 {
@@ -27,9 +28,10 @@ class PagesController extends Controller
         return view('pages.todo', compact('title'));
     }
 
-    public function services(){
-        $title = 'Services';
-        return view('pages.services', compact('title'));
+    public function TOP(){
+        $title = 'Lietotāju TOP';
+        $userinfo =  User::orderBy('reward_points', 'desc')->get();
+        return view ('pages.TOP')->with('userinfo', $userinfo)->with('title', $title);
     }
 
 

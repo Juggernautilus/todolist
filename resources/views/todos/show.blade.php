@@ -13,15 +13,15 @@
     <tbody>
         <tr>
         <td>Darba izveidotājs</td>
-        <td>{{$todo->user_who_submitted}}</td>
+        <td>{{App\User::find($todo->user_who_added)->name}}</td>
         </tr>
         <tr>
         <td>Darba izpildītājs</td>
         <td>
             @if($todo->user_who_submitted == 0)
-                Darbs vēl nav izpildīts!
+                Darbs vēl nav izpildīts
             @else
-            
+                {{App\User::find($todo->user_who_submitted)->name}}
             @endif
         </td>
         </tr>
@@ -31,11 +31,24 @@
         </tr>
         <tr>
         <td>Termiņš</td>
-        <td>{{$todo->deadline}}</td>
+            @if(!$todo->deadline)
+                <td>Nav noteikta termiņa</td>
+            @else
+                <td>{{$todo->deadline}}</td>
+            @endif
         </tr>
         <tr>
         <td>Izpildes datums</td>
-        <td>{{$todo->updated_at}}</td>
+        <td>
+            @if($todo->status)
+            
+            {{$todo->updated_at}}
+
+            @else
+            Darbs vēl nav izpildīts
+        
+            @endif
+        </td>
         </tr>
         <tr>
         <td>Prioritāte</td>
@@ -48,5 +61,7 @@
     </tbody>
 </table>
 
+@if($todo->status == 0)
 <a href="{{ route('todo/toggle', $todo->id)}}"  class="btn btn-success">Izpildīt</a>
+@endif
 @endsection

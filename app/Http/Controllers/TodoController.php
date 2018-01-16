@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Todo;
 use Auth;
 use Carbon\Carbon;
+use App\User;
 
 class TodoController extends Controller
 {
@@ -97,6 +98,15 @@ class TodoController extends Controller
         return view('todos.show')->with('todo', $todo);
     }
 
+
+
+    public function useradded($todo) {
+        $user = User::find($todo->id);
+        $whoadded = $user->name;
+        return view('todos.show')->with('whoadded', $whoadded);
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -125,7 +135,13 @@ class TodoController extends Controller
         $todo = Todo::findOrFail($id);
         $todo->status = !$todo->status;
         $todo->user_who_submitted = Auth::user()->id;
+
+
+        $user = User::find($todo->user_who_submitted);
+        $user->reward_points += $todo->reward;
+        $user->jobs_done++;
         $todo->save();
+        $user->save();
         return redirect('/todo')->with('success', 'Uzdevums izpildits');
     }
 

@@ -29,8 +29,8 @@
                                 <li class="{{ Request::is('about') ? 'active' : '' }}">
                                         <a href="{{ url('/todo') }}">To-Do List</a>
                                 </li>
-                                <li class="{{ Request::is('services') ? 'active' : '' }}">
-                                        <a href="{{ url('/services') }}">Services</a>
+                                <li class="{{ Request::is('TOP') ? 'active' : '' }}">
+                                        <a href="{{ url('/TOP') }}">TOP</a>
                                 </li>
                         </ul>
     
